@@ -23,13 +23,13 @@ def get_pixeldata(dicom_path):
     plt.show()
     # print('Dataset tags:\n',dataset,dataset.pixel_array)
 
-    # 提取图像像素数据
+    # Extract Image Pixel Data
     image = dataset.pixel_array.astype(float)
     image = cv2.resize(image, (224, 224))
 
-    # 归一化
+    # Scale normalization
     image = (image - image.mean()) / image.std()
-    print(image)
+    # print(image)
 
     return image
 
@@ -67,9 +67,9 @@ if __name__ == '__main__':
         filenames = os.listdir(filepath)
         for i in range(len(filenames)):
             dicom_path = os.path.join(filepath, filenames[i])
-            print(dicom_path)
             png_name = os.path.splitext(filenames[i])[0]
-            dst_path = os.path.join(output_path, (png_name + '.png'))
+            dst_path = os.path.join(output_path, (png_name + '.png'))、
+            
             pixel_array = get_pixeldata(dicom_path)
             # dicom to png
             dicom2png(dicom_path, dst_path, 256, 256)
